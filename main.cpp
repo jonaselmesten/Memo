@@ -8,21 +8,19 @@
 #include "cardwindow.h"
 #include <iostream>
 #include <ctime>
+#include <filesystem>
 
-using namespace std;
+/**
+ * @brief main
+ * @param argc
+ * @param argv
+ * @return
+ */
+int main(int argc, char *argv[]) {
 
-int main(int argc, char *argv[])
-{
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-
-    //TEMP
-    QString as = QDateTime::currentDateTime().toString("yyyy-MM-dd");
-    QDateTime date = QDateTime::fromString(as, "yyyy-MM-dd");
-    date = date.addDays(-5);
-    std::cout << as.toStdString() << std::endl;
-    std::cout << date.toString("yyyy-MM-dd").toStdString() << std::endl;
 
     return a.exec();
 }

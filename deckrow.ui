@@ -22,16 +22,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="cardsDue">
+    <widget class="QLabel" name="timeStudied">
      <property name="text">
-      <string>Due:0</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QLabel" name="cardsTotal">
-     <property name="text">
-      <string>Total:0</string>
+      <string>Not studied</string>
      </property>
     </widget>
    </item>

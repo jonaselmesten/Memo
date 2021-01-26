@@ -1,3 +1,7 @@
+//Jonas Elmesten
+//joel1803@student.miun.se
+//Projket - DT047G
+
 #ifndef CARD_H
 #define CARD_H
 
@@ -5,30 +9,58 @@
 #include <string>
 #include "cardpart.h"
 
-//Gör denna abstrakt också (OM TID FINNS)
-class Card
-{
-    int next_date_modifier;
-    QDateTime next_date;
+enum Level {VERY_HARD, HARD, MEDIUM, EASY, VERY_EASY};
 
-    CardPart *question;
-    CardPart *answer;
+/**
+ * @brief The Card class
+ * Card as in "flash card".
+ * Cards will always consist of a question and an answer.
+ * The card will also have a difficulty level that can be adjusted
+ * by the user when studying it.
+ * It will be adjusted by 5 levels: very hard, hard, medium, easy and very easy.
+ * Depending on the level the date of the card will change.
+ *
+ * The date decides when the card can be studied next time.
+ * If you press very easy many times it will be seen less often and
+ * the date will be pushed further into the future.
+ */
+class Card {
 
 public:
 
-    Card(CardPart *question, CardPart *answer);
+    Card(CardPart *question, CardPart *answer, int nextDateModifier, QDateTime nextDate);
 
-    Card(CardPart *question, CardPart *answer, int next_date_modifier, QDateTime next_date);
+    Card(const Card &rhs); //Copy
 
-    std::string to_saveable_string();
+    Card(Card &&rhs); //Move const
 
-    std::string update_next_review(int difficultyLevel);
+    Card& operator =(const Card &rhs); //Copy assign
+
+    Card& operator =(Card &&rhs); //Move assign
+
+    std::string updateNextReview(Level difficultyLevel);
 
     void adjustDifficulty();
 
-    CardPart& getQuestion();
+    CardPart* getQuestion();
 
-    CardPart& getAnswer();
+    CardPart* getAnswer();
+
+    int getDateModifier();
+
+    QDateTime& getNextDate();
+
+    ~Card ();
+
+private:
+
+    void swap(Card &lhs, Card &rhs);
+
+    int nextDateModifier;
+    QDateTime nextDate;
+
+    CardPart *question;
+    CardPart *answer;
 
 };
 
